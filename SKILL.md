@@ -1,12 +1,12 @@
 ---
-name: j4y-web3-research
+name: web3-daily
 description: >-
   Web3 personalized research digest service. Provides public digest (macro news + KOL sentiment + market data) 
   or personalized digest based on wallet address. Use when user asks for Web3 news, requests digest, 
   provides wallet address, or says /web3. No API key required.
 ---
 
-# J4Y Web3 Research
+# Web3 Daily
 
 Provides Web3 research digest service with two modes:
 - **Public**: Get general Web3 digest without any input
@@ -166,7 +166,7 @@ chmod 600 ~/.j4y/.env
 
 5. Set up cron job:
 ```bash
-SKILL_DIR="${CLAUDE_SKILL_DIR:-~/.cursor/skills/j4y-web3-research}"
+SKILL_DIR="${CLAUDE_SKILL_DIR:-~/.cursor/skills/web3-daily}"
 (crontab -l 2>/dev/null | grep -v "j4y-digest"; echo "0 8 * * * cd $SKILL_DIR/scripts && node deliver.js 2>/dev/null") | crontab -
 ```
 
