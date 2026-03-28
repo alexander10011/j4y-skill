@@ -4,6 +4,9 @@ An open-source AI Agent Skill that provides Web3 research digest service.
 
 一个开源的 AI Agent Skill，为你提供 Web3 投研日报服务。
 
+[![ClawHub](https://img.shields.io/badge/ClawHub-web3--daily-blue)](https://clawhub.ai/alexander10011/web3-daily)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 ---
 
 **Two Modes | 两种模式**:
@@ -20,9 +23,19 @@ An open-source AI Agent Skill that provides Web3 research digest service.
 npx skills add alexander10011/web3-daily
 ```
 
-This automatically installs to all supported AI agents (Cursor, Claude Code, Codex, Windsurf, etc.)
+This automatically installs to all supported AI agents:
 
-自动安装到所有支持的 AI Agent（Cursor、Claude Code、Codex、Windsurf 等）
+自动安装到所有支持的 AI Agent：
+
+| Platform | Supported |
+|----------|-----------|
+| Cursor | ✅ |
+| Claude Code | ✅ |
+| Codex | ✅ |
+| Windsurf | ✅ |
+| Gemini CLI | ✅ |
+| Amp | ✅ |
+| And 40+ more... | ✅ |
 
 **Manual install | 手动安装**:
 
@@ -32,7 +45,46 @@ git clone https://github.com/alexander10011/web3-daily.git ~/.cursor/skills/web3
 
 # Claude Code
 git clone https://github.com/alexander10011/web3-daily.git ~/.claude/skills/web3-daily
+
+# Generic (works for most agents)
+git clone https://github.com/alexander10011/web3-daily.git ~/.agents/skills/web3-daily
 ```
+
+### For OpenClaw Users | OpenClaw 用户
+
+OpenClaw requires an MCP Server version. Use our separate MCP package:
+
+OpenClaw 需要 MCP Server 版本，请使用我们的 MCP 包：
+
+```bash
+# Install from ClawHub
+# Visit: https://clawhub.ai/alexander10011/web3-daily-mcp
+```
+
+Or configure in `openclaw.json`:
+
+或在 `openclaw.json` 中配置：
+
+```json
+{
+  "plugins": {
+    "entries": {
+      "web3-daily-mcp": {
+        "enabled": true,
+        "command": "npx",
+        "args": ["-y", "web3-daily-mcp"]
+      }
+    }
+  }
+}
+```
+
+**Why two versions? | 为什么有两个版本？**
+
+| Version | Type | For |
+|---------|------|-----|
+| `web3-daily` | Prompt-based Skill | Cursor, Claude Code, Codex, etc. (agents that can execute shell commands) |
+| `web3-daily-mcp` | MCP Server | OpenClaw (agents that only support MCP protocol) |
 
 ### Usage | 使用
 
@@ -476,13 +528,15 @@ Make the digest more concise
 
 ## Architecture | 技术架构
 
+### For Cursor / Claude Code / Codex (Prompt-based)
+
 ```
 ┌─────────────────────────────────────┐
 │         Your AI Agent               │
-│   (Cursor / Claude Code / etc.)     │
+│   (Cursor / Claude Code / Codex)    │
 └─────────────────┬───────────────────┘
                   │ Read SKILL.md
-                  │ Call API
+                  │ Execute curl commands
                   ▼
 ┌─────────────────────────────────────┐
 │         J4Y Backend API             │
@@ -493,6 +547,40 @@ Make the digest more concise
 │   /api/v1/profile        Profile    │
 └─────────────────────────────────────┘
 ```
+
+### For OpenClaw (MCP Server)
+
+```
+┌─────────────────────────────────────┐
+│         OpenClaw Agent              │
+└─────────────────┬───────────────────┘
+                  │ Call MCP Tools
+                  ▼
+┌─────────────────────────────────────┐
+│      web3-daily-mcp Server          │
+│                                     │
+│   get_public_digest()               │
+│   get_personalized_digest()         │
+│   get_wallet_profile()              │
+│   get_market_overview()             │
+└─────────────────┬───────────────────┘
+                  │ HTTP Request
+                  ▼
+┌─────────────────────────────────────┐
+│         J4Y Backend API             │
+└─────────────────────────────────────┘
+```
+
+### Data Sources | 数据来源
+
+The J4Y backend aggregates:
+
+J4Y 后端聚合以下数据源：
+
+- 📰 **170+ News Sources**: RSS feeds, The Block, CoinDesk, Decrypt, etc.
+- 🐦 **50+ KOL Twitter Accounts**: Chinese + English crypto influencers
+- 📊 **Real-time Market Data**: CoinGecko API, Fear & Greed Index
+- 🔗 **On-chain Data**: DeBank API for wallet analysis
 
 ## FAQ | 常见问题
 
@@ -525,6 +613,14 @@ Make the digest more concise
 crontab -l | grep -v "j4y" | crontab -
 ```
 
+## Related Projects | 相关项目
+
+| Project | Description |
+|---------|-------------|
+| [web3-daily](https://github.com/alexander10011/web3-daily) | Prompt-based skill for Cursor, Claude Code, etc. |
+| [web3-daily-mcp](https://github.com/alexander10011/web3-daily-mcp) | MCP Server for OpenClaw |
+| [ClawHub Page](https://clawhub.ai/alexander10011/web3-daily) | ClawHub marketplace listing |
+
 ## Contributing | 贡献
 
 Issues and Pull Requests are welcome!
@@ -534,3 +630,7 @@ Issues and Pull Requests are welcome!
 ## License | 许可证
 
 MIT License
+
+---
+
+Made with ❤️ by [Alex Wang](https://github.com/alexander10011)
