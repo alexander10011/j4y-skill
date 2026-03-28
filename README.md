@@ -1,43 +1,96 @@
 # Web3 Daily
 
-An open-source AI Agent Skill that provides Web3 research digest service.
+**Follow the market, not the noise.** An AI-powered Web3 research digest that tracks crypto news, KOL sentiment, and market data — with optional personalization based on your on-chain behavior.
 
-一个开源的 AI Agent Skill，为你提供 Web3 投研日报服务。
+**跟踪市场，而非噪音。** 一个 AI 驱动的 Web3 投研日报，追踪加密新闻、KOL 舆情和市场数据 — 可选基于链上行为的个性化推荐。
 
 [![ClawHub](https://img.shields.io/badge/ClawHub-web3--daily-blue)](https://clawhub.ai/alexander10011/web3-daily)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/alexander10011/web3-daily)](https://github.com/alexander10011/web3-daily)
 
 ---
 
-**Two Modes | 两种模式**:
-- 🌐 **Public | 公共版**: Get general Web3 digest without any input (macro news + KOL sentiment + market data)
-- 🎯 **Personalized | 个性化版**: Input wallet address to get digest based on on-chain behavior
+## What You Get | 你能得到什么
+
+A daily digest delivered to your AI agent (or Telegram) with:
+
+每日日报推送到你的 AI Agent（或 Telegram），包含：
+
+- 📊 **Real-time market data** — BTC/ETH prices, Fear & Greed Index
+- 📰 **Macro news analysis** — 5-8 key events from 170+ sources
+- 📡 **KOL sentiment** — What Chinese + English crypto Twitter is saying
+- 🎯 **Personalized intel** (optional) — News related to YOUR holdings
+- 🌐 **Bilingual** — Available in English, Chinese, or both
+
+**No API keys needed** — all data is fetched from our backend. Your first digest arrives in seconds.
 
 ## Quick Start | 快速开始
 
-### Installation | 安装
-
-**One-line install (Recommended) | 一行命令安装（推荐）**:
+### 1. Install | 安装
 
 ```bash
 npx skills add alexander10011/web3-daily
 ```
 
-This automatically installs to all supported AI agents:
+That's it. Works with Cursor, Claude Code, Codex, Windsurf, Gemini CLI, and 40+ other agents.
 
-自动安装到所有支持的 AI Agent：
+就这样。支持 Cursor、Claude Code、Codex、Windsurf、Gemini CLI 等 40+ 个 Agent。
 
-| Platform | Supported |
-|----------|-----------|
-| Cursor | ✅ |
-| Claude Code | ✅ |
-| Codex | ✅ |
-| Windsurf | ✅ |
-| Gemini CLI | ✅ |
-| Amp | ✅ |
-| And 40+ more... | ✅ |
+### 2. Use | 使用
 
-**Manual install | 手动安装**:
+Just tell your AI agent:
+
+直接对 AI 助手说：
+
+```
+Give me today's Web3 digest
+# or
+给我今天的 Web3 日报
+```
+
+Your first digest arrives in seconds. No setup, no config files, no API keys.
+
+几秒钟内收到日报。无需设置、无需配置文件、无需 API Key。
+
+### 3. Personalize (Optional) | 个性化（可选）
+
+Want news tailored to your holdings? Just add your wallet:
+
+想要基于持仓的定制新闻？只需提供钱包地址：
+
+```
+My wallet is 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045, give me digest
+```
+
+---
+
+## Changing Settings | 修改设置
+
+Your preferences are configurable through conversation. Just tell your agent:
+
+通过对话即可修改设置，直接告诉 AI 助手：
+
+| You say | What happens |
+|---------|--------------|
+| "Switch to English digest" | Changes language to English |
+| "给我中文日报" | 切换为中文 |
+| "Push to my Telegram daily at 8 AM" | Sets up scheduled delivery |
+| "Show me my settings" | Displays current config |
+| "Cancel scheduled delivery" | Removes cron job |
+
+---
+
+## Installation Options | 安装选项
+
+### One-line install (Recommended)
+
+```bash
+npx skills add alexander10011/web3-daily
+```
+
+Automatically installs to all supported agents.
+
+### Manual install
 
 ```bash
 # Cursor
@@ -46,24 +99,19 @@ git clone https://github.com/alexander10011/web3-daily.git ~/.cursor/skills/web3
 # Claude Code
 git clone https://github.com/alexander10011/web3-daily.git ~/.claude/skills/web3-daily
 
-# Generic (works for most agents)
+# Generic
 git clone https://github.com/alexander10011/web3-daily.git ~/.agents/skills/web3-daily
 ```
 
-### For OpenClaw Users | OpenClaw 用户
+### For OpenClaw Users
 
-OpenClaw requires an MCP Server version. Use our separate MCP package:
-
-OpenClaw 需要 MCP Server 版本，请使用我们的 MCP 包：
+OpenClaw requires an MCP Server version (it can't execute shell commands):
 
 ```bash
-# Install from ClawHub
 # Visit: https://clawhub.ai/alexander10011/web3-daily-mcp
 ```
 
 Or configure in `openclaw.json`:
-
-或在 `openclaw.json` 中配置：
 
 ```json
 {
@@ -79,12 +127,10 @@ Or configure in `openclaw.json`:
 }
 ```
 
-**Why two versions? | 为什么有两个版本？**
-
 | Version | Type | For |
 |---------|------|-----|
-| `web3-daily` | Prompt-based Skill | Cursor, Claude Code, Codex, etc. (agents that can execute shell commands) |
-| `web3-daily-mcp` | MCP Server | OpenClaw (agents that only support MCP protocol) |
+| `web3-daily` | Prompt-based | Cursor, Claude Code, Codex, etc. |
+| `web3-daily-mcp` | MCP Server | OpenClaw |
 
 ### Usage | 使用
 
@@ -519,12 +565,48 @@ Make the digest more concise
 让日报更简洁一些
 ```
 
+## How It Works | 工作原理
+
+```
+1. Our backend crawls 170+ news sources + 50+ KOL accounts every 6 hours
+2. Your agent calls our API (one HTTP request, no API keys)
+3. AI generates a digestible summary based on your language preference
+4. (Optional) Personalized mode adds your on-chain profile to the mix
+5. Digest delivered to your agent or Telegram
+```
+
+See `examples/sample-digest.md` for what the output looks like.
+
+## Default Sources | 数据来源
+
+### News Sources (170+)
+
+- The Block, CoinDesk, Decrypt, Cointelegraph
+- DeFiLlama, Dune Analytics
+- Official protocol blogs
+- And 160+ more RSS feeds...
+
+### KOL Accounts (50+)
+
+**Chinese KOLs**: 0xSunny, Phyrex, 0xWizard, Colin Wu, 加密韋馱, 麻吉大哥, and more...
+
+**English KOLs**: Vitalik Buterin, Cobie, Hsaka, DegenSpartan, Pentoshi, and more...
+
+### Market Data
+
+- CoinGecko API (BTC/ETH prices)
+- Alternative.me (Fear & Greed Index)
+- DeBank API (on-chain wallet data)
+
+The source list is curated and updated regularly — you always get the latest sources without doing anything.
+
 ## Privacy | 隐私说明
 
-- ✅ All API keys are managed server-side, you don't need to configure any
-- ✅ Wallet address is only used to generate profile, not stored locally
-- ✅ Telegram Token is stored in your local `~/.j4y/.env`, never uploaded
-- ✅ All communication is encrypted via HTTPS
+- ✅ **No API keys needed** — all content fetched from our backend
+- ✅ **Wallet address** — only used to generate profile, cached 24h, not sold
+- ✅ **Telegram token** — stored locally in `~/.j4y/.env`, never uploaded
+- ✅ **Public mode** — zero personal data collected
+- ✅ **All traffic** — encrypted via HTTPS
 
 ## Architecture | 技术架构
 
