@@ -1,9 +1,14 @@
 ---
 name: web3-daily
+version: 1.2.1
 description: >-
   Web3 personalized research digest service. Provides public digest (macro news + KOL sentiment + market data) 
   or personalized digest based on wallet address. Use when user asks for Web3 news, requests digest, 
   provides wallet address, or says /web3. No API key required.
+author: Alex Wang
+repository: https://github.com/alexander10011/web3-daily
+homepage: https://github.com/alexander10011/web3-daily
+license: MIT
 permissions:
   - network
   - filesystem (optional, only for Telegram delivery)
