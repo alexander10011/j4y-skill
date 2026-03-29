@@ -4,7 +4,7 @@ Below is an example of public digest output:
 
 ---
 
-# 📅 J4Y Web3 Digest | 2026-03-25
+# 📅 Web3 Daily Digest | 2026-03-25
 
 ---
 
@@ -84,15 +84,6 @@ Expresses concern about current market valuations, believes some project FDVs ar
 **@AriannaSimpson (Arianna)**
 Shares a16z's view on AI x Crypto track, believes this is the next big opportunity.
 🔗 [Original](https://x.com/...)
-
----
-
-## 🎯 Want Personalized Recommendations?
-
-Provide your wallet address to get personalized digest based on on-chain behavior:
-- News related to your holdings
-- Updates on protocols you follow
-- Customized investment suggestions
 
 ---
 
