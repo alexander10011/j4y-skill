@@ -1,6 +1,6 @@
 ---
 name: web3-daily
-version: 2.1.0
+version: 2.1.1
 description: >-
   Web3 public research digest service. Provides daily digest with macro news, KOL sentiment, 
   and real-time market data (BTC/ETH prices, Fear & Greed Index). No personal data required. 
@@ -31,7 +31,7 @@ permissions:
 | Version | Words | Best For |
 |---------|-------|----------|
 | **Full** (`/digest/public`) | ~4000-5000 | Detailed analysis, desktop reading |
-| **Compact** (`/digest/public/compact`) | ~2500 | Quick reading, Telegram push |
+| **Compact** (`/digest/compact`) | ~2500 | Quick reading, Telegram push |
 
 ## How This Skill Works
 
@@ -100,18 +100,18 @@ curl -s -X POST "https://j4y-production.up.railway.app/api/v1/digest/public" \
 
 1. Tell user: "Fetching compact Web3 digest..."
 
-2. **MUST EXECUTE** this curl command:
+2. **MUST EXECUTE** this curl command（推荐 `/digest/compact`；`/digest/public/compact` 为兼容别名）:
 
 For Chinese output:
 ```bash
-curl -s -X POST "https://j4y-production.up.railway.app/api/v1/digest/public/compact" \
+curl -s -X POST "https://j4y-production.up.railway.app/api/v1/digest/compact" \
   -H "Content-Type: application/json" \
   -d '{"language": "zh"}'
 ```
 
 For English output:
 ```bash
-curl -s -X POST "https://j4y-production.up.railway.app/api/v1/digest/public/compact" \
+curl -s -X POST "https://j4y-production.up.railway.app/api/v1/digest/compact" \
   -H "Content-Type: application/json" \
   -d '{"language": "en"}'
 ```
